@@ -12,7 +12,7 @@ defmodule Product do
       :world
 
   """
-  def hello do
-    :world
+  def greet(name) do
+    "Hello, #{name}!"
   end
 end
