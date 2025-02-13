@@ -1,5 +1,4 @@
 # Plan
-<<<<<<< HEAD
 
 Help me build the architecture necessary to create, with a team, a product that can track information for cattle which would include:
 
@@ -190,6 +189,3 @@ Here's a roadmap for your cattle tracking system project, breaking down tasks in
 | Advanced Features   | Analytics, Global Comparisons          | Week 16  |
 | Deployment          | Production Deployment, Monitoring Tools| Week 20  |
 ```
-=======
-## 
->>>>>>> 7ce12dadbd52fadc5c18248f82fc6e1dcc249127
