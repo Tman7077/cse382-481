@@ -1,5 +1,5 @@
 {application,product,
-             [{modules,['Elixir.Product']},
+             [{modules,[]},
               {optional_applications,[]},
               {applications,[kernel,stdlib,elixir,logger]},
               {description,"product"},
