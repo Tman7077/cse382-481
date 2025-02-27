@@ -7,6 +7,9 @@ Help me build the architecture necessary to create, with a team, a product that 
 - We also need to be able to compare single cows in the lot with other cows, lots with other lots, as well as our feedlot with other feedlots in the local area as well as the world.
 - This system needs to be highly concurrent and distributed to avoid single points of failure. The system must scale to support millions of feedlots of all sizes around the world.
 
+Step by step to set up VM using droplet:
+https://chatgpt.com/share/67c0b8aa-2ce0-8010-901e-46bb7580e790
+
 Plan GPT, idk:
 https://chatgpt.com/share/67900170-1cc0-8012-b6a4-69c0e01cd654
 
