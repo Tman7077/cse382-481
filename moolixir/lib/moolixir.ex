@@ -1,6 +1,6 @@
-defmodule Product1 do
+defmodule Moolixir do
   @moduledoc """
-  Documentation for `Product1`.
+  Documentation for `Moolixir`.
   """
 
   @doc """
@@ -8,7 +8,7 @@ defmodule Product1 do
 
   ## Examples
 
-      iex> Product1.hello()
+      iex> Moolixir.hello()
       :world
 
   """
