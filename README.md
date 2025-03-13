@@ -10,14 +10,11 @@ Help me build the architecture necessary to create, with a team, a product that 
 Step by step to set up VM using droplet:
 https://chatgpt.com/share/67c0b8aa-2ce0-8010-901e-46bb7580e790
 
-Plan GPT, idk:
+Plan GPT:
 https://chatgpt.com/share/67900170-1cc0-8012-b6a4-69c0e01cd654
 
 Structural Beam chat:
 https://chatgpt.com/share/67a27964-da5c-8012-8dc0-8d6a5c0e9396
-
-GitHub repo:
-https://github.com/Tman7077/cse382-481
 
 
 ## Minimal Viable Product “First Sprint”
