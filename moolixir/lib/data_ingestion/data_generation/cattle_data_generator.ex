@@ -12,6 +12,7 @@ defmodule DataIngestion.DataGeneration.CattleDataGenerator do
   use DataIngestion.DataGeneration
 
   ##### Public API #####
+
   @doc """
   Generates a feedlot data structure with a given number of cows.
   Each cow will have a unique ID, but share the same lot ID and location.
@@ -45,11 +46,10 @@ defmodule DataIngestion.DataGeneration.CattleDataGenerator do
 
 
   ##### Private functions #####
-  @doc """
-  Simulates the scanning of a cow.
-  If provided a lot ID, it will be used.
-  If not, a random lot ID will be generated.
-  """
+
+  # Simulates the scanning of a cow.
+  # If provided a lot ID, it will be used.
+  # If not, a random lot ID will be generated.
   @spec scan_cow(String.t()) :: scan()
   defp scan_cow(lot_id) do
     lot_id =
@@ -66,10 +66,8 @@ defmodule DataIngestion.DataGeneration.CattleDataGenerator do
     }
   end
 
-  @doc """
-  Simulates the weighing of a cow.
-  The weight is a random value between 400 and 1100 kg.
-  """
+  # Simulates the weighing of a cow.
+  # The weight is a random value between 400 and 1100 kg.
   @spec weigh_cow() :: weight() # part of a cow()
   defp weigh_cow do
     %{

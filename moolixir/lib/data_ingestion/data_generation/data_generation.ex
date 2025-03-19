@@ -47,13 +47,12 @@ defmodule DataIngestion.DataGeneration do
       ### No public API ###
 
       ##### Provate functions #####
-      @doc """
-      Generates info associated with the scanning of a tag.
-      This includes the timestamp, and a `location`,
-        which may optionally be provided,
-        in the case that a cow is part of a feedlot
-        (which would have a static location).
-      """
+
+      # Generates info associated with the scanning of a tag.
+      # This includes the timestamp, and a `location`,
+      #   which may optionally be provided,
+      #   in the case that a cow is part of a feedlot
+      #   (which would have a static location).
       @spec gen_scan_info(map()) :: scan() # part of a cow() or a feedlot()
       defp gen_scan_info(location) do
         location =
@@ -67,10 +66,8 @@ defmodule DataIngestion.DataGeneration do
         }
       end
 
-      @doc """
-      Generates a random location map with
-        latitude and longitude values.
-      """
+      # Generates a random location map with
+      #   latitude and longitude values.
       @spec gen_random_loc() :: location()
       defp gen_random_loc do
         %{

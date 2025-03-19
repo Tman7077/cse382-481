@@ -12,6 +12,7 @@ defmodule DataIngestion.DataGeneration.CattleDataUpdater do
   use DataIngestion.DataGeneration
 
   ##### Public API #####
+
   @doc """
   Updates an existing feedlot data structure
     with new cattle scan information.
@@ -44,11 +45,10 @@ defmodule DataIngestion.DataGeneration.CattleDataUpdater do
 
 
   ##### Private functions #####
-  @doc """
-  Simulates the rescan of a cow,
-    updating the feed consumed with a (random) provided variance,
-    and current vaccinations.
-  """
+
+  # Simulates the rescan of a cow,
+  #   updating the feed consumed with a (random) provided variance,
+  #   and current vaccinations.
   @spec rescan(cow(), float()) :: cow()
   defp rescan(cow, diff) do
     cow
@@ -59,10 +59,8 @@ defmodule DataIngestion.DataGeneration.CattleDataUpdater do
       })
   end
 
-  @doc """
-  Simulates the reweighing of a cow,
-    updating the weight based on a (random) provided variance.
-  """
+  # Simulates the reweighing of a cow,
+  #   updating the weight based on a (random) provided variance.
   @spec reweigh(cow(), float()) :: cow()
   defp reweigh(cow, diff) do
     Map.update!(cow, :weight, fn weight ->
@@ -70,11 +68,9 @@ defmodule DataIngestion.DataGeneration.CattleDataUpdater do
     end)
   end
 
-  @doc """
-  Updates the data in a map,
-    merging new data into the old data.
-  Always overwrites old data with new data.
-  """
+  # Updates the data in a map,
+  #   merging new data into the old data.
+  # Always overwrites old data with new data.
   @spec update(map(), map()) :: map()
   defp update(old, new) do
     Map.merge(old, new,
