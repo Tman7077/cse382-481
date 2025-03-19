@@ -9,6 +9,8 @@ alias EventProcessing, as: EP
 alias FeedManagement, as: FM
 
 # Aliases for child modules
-alias DataIngestion.DataGeneration.CattleDataGenerator, as: CDG
-alias DataIngestion.DataGeneration.CattleDataUpdater, as: CDU
-alias DataIngestion.CattleDataStream, as: CDS
+alias DataIngestion.DataGeneration.CattleDataGenerator, as: CDGen
+alias DataIngestion.DataGeneration.CattleDataUpdater, as: CDUp
+alias DataIngestion.CattleDataStream, as: CDStream
+alias DataIngestion.CattleDataSender, as: CDSend
+alias DataIngestion.CattleDataReceiver, as: CDRecv
