@@ -1,6 +1,6 @@
-defmodule Moolixir do
+defmodule DataStorage.Blank do
   @moduledoc """
-  Documentation for `Moolixir`.
+  Documentation for `DataStorage.Blank`.
   """
 
   @doc """
@@ -8,7 +8,7 @@ defmodule Moolixir do
 
   ## Examples
 
-      iex> Moolixir.hello()
+      iex> DS.Blank.hello()
       :world
 
   """
