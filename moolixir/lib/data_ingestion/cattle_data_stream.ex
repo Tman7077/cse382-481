@@ -7,12 +7,14 @@ defmodule DataIngestion.CattleDataStream do
   use GenStateMachine
 
   alias DataIngestion.DataGeneration.CattleDataGenerator, as: CDG
+  alias DataIngestion.CattleDataSender, as: CDSend
 
   @interval 1000  # milliseconds between data events
 
   ##### Initialization #####
-  @spec start_link() :: {:ok, pid()}
-  def start_link do
+  @spec start_link(atom()) :: {:ok, pid()}
+  def start_link(where) do
+    CDSend.start_link(where)
     GenStateMachine.start_link(__MODULE__, :ok, name: __MODULE__)
   end
 
@@ -64,43 +66,44 @@ defmodule DataIngestion.CattleDataStream do
     # (`:cows` or `:feedlots`),
     # using the `@interval` to determine the time between generations.
   def handle_event(:info, :gen, :cows, %{timer_ref: _} = data) do
-    print(CDG.gen_cow_data())
+    message = CDG.gen_cow_data()
+    # print(message)
+    CDSend.send_remote(message)
     timer_ref = schedule_generation(@interval)
     {:keep_state, %{data | timer_ref: timer_ref}}
   end
   def handle_event(:info, :gen, :feedlots, %{timer_ref: _} = data) do
-    print(CDG.gen_feedlot_data(:rand.uniform(10)))
+    message = CDG.gen_feedlot_data(:rand.uniform(10))
+    # print(message)
+    CDSend.send_remote(message)
     timer_ref = schedule_generation(@interval * 5)
     {:keep_state, %{data | timer_ref: timer_ref}}
   end
 
 
   ##### Private functions #####
-  @doc """
-  Schedules the next generation event.
-  `interval` is specified in milliseconds.
-  """
+
+  # Schedules the next generation event.
+  # `interval` is specified in milliseconds.
   @spec schedule_generation(integer()) :: reference()
   defp schedule_generation(interval) do
     Process.send_after(self(), :gen, interval)
   end
 
-  @doc """
-  Pretty-prints the generated map to the console.
-  The map is formatted with line breaks and colors
-    for better readability.
-  """
-  @spec print(map()) :: :ok
-  defp print(map) do
-    IO.puts("Generated data:")
-    IO.inspect(
-      map,
-      pretty: true,
-      syntax_colors: [
-        atom: :cyan,
-        string: :green,
-        number: :yellow
-      ]
-    )
-  end
+  # Pretty-prints the generated map to the console.
+  # The map is formatted with line breaks and colors
+  #   for better readability.
+  # @spec print(map()) :: :ok
+  # defp print(map) do
+  #   IO.puts("Generated data:")
+  #   IO.inspect(
+  #     map,
+  #     pretty: true,
+  #     syntax_colors: [
+  #       atom: :cyan,
+  #       string: :green,
+  #       number: :yellow
+  #     ]
+  #   )
+  # end
 end
