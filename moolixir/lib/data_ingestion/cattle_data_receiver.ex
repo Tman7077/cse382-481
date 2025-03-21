@@ -8,6 +8,7 @@ defmodule DataIngestion.CattleDataReceiver do
   Starts the receiver process and registers it
     under the name `:remote_receiver`.
   """
+  @spec start() :: :ok
   def start do
     pid = spawn(__MODULE__, :loop, [])
     Process.register(pid, :remote_receiver)
@@ -18,6 +19,7 @@ defmodule DataIngestion.CattleDataReceiver do
   When a message is received, it calls the `print` function
     to display the data.
   """
+  @spec loop() :: :ok
   def loop do
     receive do
       {:data, map} ->

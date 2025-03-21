@@ -79,6 +79,10 @@ defmodule DataIngestion.CattleDataStream do
     timer_ref = schedule_generation(@interval * 5)
     {:keep_state, %{data | timer_ref: timer_ref}}
   end
+  # Handles the case when the generation is stopped (a no-op; the state remains).
+  def handle_event(:info, :gen, :stop, data) do
+    {:keep_state, data}
+  end
 
 
   ##### Private functions #####
