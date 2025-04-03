@@ -1,4 +1,4 @@
-defmodule FeedManagementTest do
+defmodule FeedManagement.FeedDataManagerTest do
   use ExUnit.Case
   doctest FeedManagement
 
