@@ -1,34 +1,53 @@
-# test/feed_management/feed_data_manager_test.exs
 defmodule FeedManagement.FeedDataManagerTest do
   use ExUnit.Case
   alias FeedManagement.FeedDataManager
 
+  # Setup: Start a FeedDataManager with an empty list for feed_data.
   setup do
     {:ok, pid} = FeedDataManager.start_link(%{feed_data: []})
     {:ok, pid: pid}
   end
 
-  describe "add_feed_data/2" do
-    test "adds feed data correctly", %{pid: pid} do
-      feed_data = %{cattle_id: "cow123", feed_type: "corn", quantity: 50, cost_per_unit: 0.10}
-      FeedDataManager.add_feed_data(pid, feed_data)
-
-      feed_data_list = FeedDataManager.get_feed_data(pid)
-
-      assert length(feed_data_list) == 1
-      assert hd(feed_data_list) == feed_data
+  describe "initial state" do
+    test "returns an empty feed_data list initially", %{pid: pid} do
+      # When no feed data is added, get_feed_data should return an empty list.
+      assert FeedDataManager.get_feed_data(pid) == []
     end
   end
 
-  describe "get_feed_data/1" do
-    test "retrieves feed data", %{pid: pid} do
-      feed_data = %{cattle_id: "cow124", feed_type: "soy", quantity: 30, cost_per_unit: 0.12}
-      FeedDataManager.add_feed_data(pid, feed_data)
+  describe "adding feed data" do
+    test "adds a single feed entry", %{pid: pid} do
+      entry = %{type: "hay", amount: 10}
+      # Add a single feed entry.
+      :ok = FeedDataManager.add_feed_data(pid, entry)
 
-      feed_data_list = FeedDataManager.get_feed_data(pid)
+      # Verify that get_feed_data returns that one entry.
+      assert FeedDataManager.get_feed_data(pid) == [entry]
+    end
 
-      assert length(feed_data_list) == 1
-      assert hd(feed_data_list) == feed_data
+    test "accumulates multiple feed entries in LIFO order", %{pid: pid} do
+      entry1 = %{type: "hay", amount: 10}
+      entry2 = %{type: "corn", amount: 15}
+
+      :ok = FeedDataManager.add_feed_data(pid, entry1)
+      :ok = FeedDataManager.add_feed_data(pid, entry2)
+
+      # Because we prepend new data, we expect entry2 at the head.
+      assert FeedDataManager.get_feed_data(pid) == [entry2, entry1]
+    end
+  end
+
+  describe "state consistency" do
+    test "retrieval does not alter the state", %{pid: pid} do
+      entry = %{type: "oats", amount: 5}
+      :ok = FeedDataManager.add_feed_data(pid, entry)
+
+      # Retrieve the state multiple times and confirm it stays the same.
+      data1 = FeedDataManager.get_feed_data(pid)
+      data2 = FeedDataManager.get_feed_data(pid)
+
+      assert data1 == [entry]
+      assert data2 == [entry]
     end
   end
 end
