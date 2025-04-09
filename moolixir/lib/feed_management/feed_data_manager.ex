@@ -1,3 +1,8 @@
+# Write documentation and unit tests for non-facade functions, only for handle_call and handle_cast
+#make call to moolixir droplet on digital ocean, from local linux terminal. Test.
+#use gpt to help generate unit tests!
+
+
 defmodule FeedManagement.FeedDataManager do
   use GenServer
 
